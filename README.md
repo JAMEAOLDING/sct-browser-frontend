@@ -1,138 +1,170 @@
-# Browser Frontend by SNOMED International
-
-![Last Commit](https://img.shields.io/github/last-commit/ihtsdo/sct-browser-frontend/develop)
-![Issues](https://img.shields.io/github/issues/ihtsdo/sct-browser-frontend)
-![Contributors](https://img.shields.io/github/contributors/ihtsdo/sct-browser-frontend)
-
-![license](https://img.shields.io/badge/License-Apache%202.0-blue.svg)
-![GitHub commit activity the past year](https://img.shields.io/github/commit-activity/m/ihtsdo/sct-browser-frontend/develop)
-
-This is a generic browser front end project, specific instances used in the IHTSDO browsers are customized in branches of this project.
-
-The browser connects to a backend REST API provided by the project: https://github.com/IHTSDO/snowstorm
-
-Project Structure
------------------
-
-The index.html includes all the logic for rendering the Browser UI, switching between different SNOMED CT releases and UI layouts (perspectives).
-
-* bootstrap-custom: folder that contains a custom build of the Boostrap framework
-* css: stylesheets for this site
-* external-libs: js libraries used by this site
-* snomed-interaction-components: js, css and fonts for the SNOMED CT widgets contained in this site
-* img: images for the site
-* i18n: internationalization files for the site and the widgets
-* index.html: one page application
-
-Internationalization
---------------------
-
-This project uses the jquery-i18n-properties plugin to support internationalization, translation of the UI components to many languages. (https://github.com/jquery-i18n-properties/jquery-i18n-properties)
-
-The i18n folder includes the base language file (/i18n/Languages.properties), this files defines the labels for English language:
-
-```
-i18n_app_name = IHTSDO SNOMED CT Browser
-i18n_release = Release
-i18n_perspective = Perspective
-i18n_about = About
-i18n_provide_feedback = Provide feedback on this browser
-```
-In other files, that include the ISO language code in the name, the labels are translated, like:
-
-Languages_es.properties (Spanish)
-```
-i18n_app_name = Navegador de SNOMED CT 
-i18n_release = Edición
-i18n_perspective = Perspectiva
-i18n_about = Sobre
-i18n_provide_feedback = Proporcione sus comentarios sobre este navegador
-```
-
-Languages_da.properties  (Danish)
-```
-i18n_welcome = Velkommen
-i18n_app_name = IHTSDO SNOMED CT Browser
-i18n_release = Udgivelse
-i18n_perspective = Visning
-i18n_about = Om
-i18n_provide_feedback = Send en kommentar om denne browser
-```
-
-## Local configuration, build and run the browser locally
-
-Local configuration
--------------------
-Run `npm install` to make the local application aware of your grunt installation.
-
-
-Build
------
-
-The Grunt default task will create all these components, running `grunt` in the root folder of the project will build all widgets and create the distribution files.
-
-- js
-  - internal-libs/snomed-interaction-components.min.js
-- css
-  - css/snomed-interaction-components.min.css
-
-
-Run locally
------------
-
-In order to obtain api-endpoint information within the local environment, a configuration similar to the following should be used:
-
-```
-user 'details here';
-worker_processes  1;
- 
-events {
-    worker_connections  1024;
-}
- 
-http {
-	include    mime.types;
-    server {
-		listen		8080;
-		server_name	localhost;
-
-    location / {
-      root /FileLocation/sct-browser-frontend/;
-    }       
-    
-    location /snowstorm/ {
-      proxy_pass https://dev-browser.ihtsdotools.org/snowstorm/;
-    }
-	}	
-}
-```
-
-## URL Shortcuts
-
-The browser includes URL parameters that will act as shorcuts for opening the browser with pre-defined settings or content selections, skipping the need of selecting options from the main view.
-
-Use:
-http://browser.ihtsdotools.org/index.html?perspective=full&conceptId1=195967001
-
-Parameter|Example Value|Use
----|---|---
-edition|MAIN/SNOMEDCT-ES, MAIN/SNOMEDCT-AU|Sets the edition that will be browsed, using the edition names defined by the backend.
-perspective|full,browsing,etc.|Sets the perspective to load.
-languages|en, es, da, pt|Sets the UI language.
-conceptId1|any SCTID|Sets the first concept details widget to this concept.
-acceptLicense|true| the SNOMED CT Browser License is automatically accepted without displaying the modal window. This means that you are explicitly accepting the license.
-diagrammingMarkupEnabled|true|SNOMED CT diagramming Markup is enabled.
-
-## Docker
-
-If you want to build an image based on any local changes you have made run the following on the command line:
-
-```bash
-docker build -t snomedinternational/snomedct-browser .
-```
-
-Or you can just jump to running the following command, replacing the `<host>` variable with the full URL to your snowstorm instance:
-
-```bash
-docker run --name snowstorm-nginx -d -p 80:80 --env API_HOST=<host> snomedinternational/snomedct-browser
-```
+  "id": "eIAMFVNblgwl0FGniCqB5IyrTvOsG9Od8mpKHtHIYLDE3",
+  "category": [
+    {
+      "text": "Imaging",
+      "coding": [
+        {
+          "system": "urn:oid:1.2.840.114350.1.13.322.2.7.10.798268.30",
+          "code": "Imaging"
+        }
+      ]
+    },
+    {
+      "text": "Radiology",
+      "coding": [
+        {
+          "system": "http://loinc.org",
+          "display": "Radiology",
+          "code": "LP29684-5"
+        }
+      ]
+    }
+  ],
+  "subject": {
+    "display": "Olding, Jamea Lynn",
+    "reference": "Patient/e.wt251NMwLgtCSOIhVg-dw3"
+  },
+  "encounter": {
+    "display": "Emergency Department",
+    "reference": "Encounter/eccD8dKRZTpHbX7-qfBvxzqDOZVj39kfihr5SkLNWbp43",
+    "identifier": {
+      "use": "usual",
+      "system": "urn:oid:1.2.840.114350.1.13.322.2.7.3.698084.8",
+      "value": "10210235691"
+    }
+  },
+  "effectiveDateTime": "2024-09-06T22:07:30Z",
+  "resourceType": "DiagnosticReport",
+  "issued": "2024-09-06T22:37:48Z",
+  "basedOn": false,
+  "identifier": [
+    {
+      "use": "official",
+      "system": "urn:oid:1.2.840.114350.1.13.322.2.7.2.798268",
+      "value": "513959628",
+      "type": {
+        "text": "Placer Identifier",
+        "coding": [
+          {
+            "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+            "display": "Placer Identifier",
+            "code": "PLAC"
+          }
+        ]
+      }
+    },
+    {
+      "use": "official",
+      "type": {
+        "text": "Filler Identifier",
+        "coding": [
+          {
+            "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+            "display": "Filler Identifier",
+            "code": "FILL"
+          }
+        ]
+      },
+      "value": "22253707"
+    }
+  ],
+  "code": {
+    "text": "CT abdomen pelvis without IV contrast",
+    "coding": [
+      {
+        "system": "http://loinc.org",
+        "code": "36952-0"
+      },
+      {
+        "system": "urn:oid:2.16.840.1.113883.6.12",
+        "display": "HC CT ABD AND PELVIS WO CONT",
+        "code": "74176"
+      },
+      {
+        "system": "urn:oid:1.2.840.114350.1.13.322.2.7.5.737384.47",
+        "code": "CICCTABP"
+      },
+      {
+        "system": "urn:oid:1.2.840.114350.1.13.322.2.7.5.737384.47",
+        "code": "CNBCTAP"
+      },
+      {
+        "system": "urn:oid:1.2.840.114350.1.13.322.2.7.5.737384.47",
+        "code": "CTABDPEL"
+      },
+      {
+        "system": "urn:oid:1.2.840.114350.1.13.322.2.7.5.737384.47",
+        "code": "CICCTABSTN"
+      },
+      {
+        "system": "urn:oid:1.2.840.114350.1.13.322.2.7.5.737384.47",
+        "code": "CNBCTAPSP"
+      },
+      {
+        "system": "urn:oid:1.2.840.114350.1.13.322.2.7.5.737384.47",
+        "code": "CTSTN"
+      },
+      {
+        "system": "urn:oid:1.2.840.114350.1.13.322.2.7.5.737384.47",
+        "code": "CTABLAT"
+      },
+      {
+        "system": "urn:oid:1.2.840.114350.1.13.322.2.7.5.737384.47",
+        "code": "CHACTABDPELWO"
+      },
+      {
+        "system": "urn:oid:1.2.840.114350.1.13.322.2.7.5.737384.47",
+        "code": "CXACTABP"
+      },
+      {
+        "system": "urn:oid:1.2.840.114350.1.13.322.2.7.5.737384.47",
+        "code": "CXACTABPST"
+      },
+      {
+        "system": "urn:oid:1.2.840.114350.1.13.322.2.7.5.737384.3",
+        "code": "IMG784"
+      },
+      {
+        "system": "urn:oid:1.2.840.114350.1.13.322.2.7.5.737384.1230111",
+        "code": "36952-0"
+      }
+    ]
+  },
+  "performer": [
+    {
+      "type": "Practitioner",
+      "reference": "Practitioner/eg9L6RzaIATYA9DdtdKc0WQ3",
+      "display": "Tara Mocker, PA"
+    },
+    {
+      "type": "Practitioner",
+      "reference": "Practitioner/eM2JucerHYh2I705MZyQeJg3",
+      "display": "Nicholas Bates, MD"
+    },
+    {
+      "type": "Organization",
+      "reference": "Organization/eX3.-W0SLGb-K1SaTq8zFb9m--DW0BNKuwD.iWUAnZJ43",
+      "display": "INTERFACED RESULT"
+    }
+  ],
+  "presentedForm": [
+    {
+      "contentType": "text/html",
+      "url": "Binary/enr5Bdy2IrgmMrYFVxMDrpW6tOcK8TXeT73xJj8EpjxM3",
+      "title": "Narrative"
+    }
+  ],
+  "result": [
+    {
+      "display": "Narrative",
+      "reference": "Observation/eOLrqv7jBPjbkEnJJ925dHS8sqCfpzoKM5HuDzyuF-0I3"
+    }
+  ],
+  "resultsInterpreter": [
+    {
+      "type": "Practitioner",
+      "reference": "Practitioner/eM2JucerHYh2I705MZyQeJg3",
+      "display": "Nicholas Bates, MD"
+    }
+  ],
+  "status": "final
